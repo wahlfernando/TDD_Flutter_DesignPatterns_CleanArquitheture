@@ -1,4 +1,6 @@
 
+import 'package:curso_tdd/data/http/http_client.dart';
+import 'package:curso_tdd/data/usecases/remote_authentication.dart';
 import 'package:faker/faker.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -8,31 +10,9 @@ import 'package:curso_tdd/domain/usecases/authentication.dart';
 
 //sut = system under test
 
-class RemoteAuthentication{
-  final HttpClient httpClient;
-  final String url;
-
-  //Contrutor da classe RemoteAuthentication
-  RemoteAuthentication({
-    @required this.httpClient, 
-    @required this.url,
-  });
 
 
-  //aqui que passa os parametros para o teste.
-  Future<void> auth(AuthenticationParans parans) async {
-    final body = {'email': parans.email, 'password': parans.secret};  
-    await httpClient.request(url: url, method: 'post', body: body);
-  }
-}
 
-abstract class HttpClient {
-  Future<void> request({
-    @required String url,
-    @required String method,
-    Map body
-  });
-}
 
 class HttpClientSpy extends Mock implements HttpClient{}
 
