@@ -16,7 +16,5 @@ abstract class Authentication {
     @required this.secret
   });
 
-  Map toJason() => {'email': email, 'password': secret};  
-
 
 }
