@@ -77,7 +77,34 @@ void main() {
 
   });
 
+  test('Shuld throw UnespectedError if HttpClient returns 500',  () async{
+    // Querermos retornar um erro chamado UnespectedError para o usuário.
+    
+    //Mocar a resposta do HttpClient
+    when(httpClient.request(url: anyNamed('url'), method: anyNamed('method'), body: anyNamed('body')))
+      .thenThrow(HttpError.serverError);
 
+    final future = sut.auth(parans);
+
+    //capturando a resposta da requisição.
+    expect(future, throwsA(DomainError.unexpected));
+
+  });
+
+  
+  test('Shuld throw InvalideCredencialsError if HttpClient returns 401',  () async{
+    // Querermos retornar um erro chamado UnespectedError para o usuário.
+    
+    //Mocar a resposta do HttpClient
+    when(httpClient.request(url: anyNamed('url'), method: anyNamed('method'), body: anyNamed('body')))
+      .thenThrow(HttpError.anauthorized);
+
+    final future = sut.auth(parans);
+
+    //capturando a resposta da requisição.
+    expect(future, throwsA(DomainError.invalidCredencials));
+
+  });
 
 
 
