@@ -4,7 +4,7 @@ import 'package:curso_tdd/data/usecases/remote_authentication.dart';
 import 'package:faker/faker.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
-import 'package:meta/meta.dart';
+
 
 import 'package:curso_tdd/domain/usecases/authentication.dart';
 
