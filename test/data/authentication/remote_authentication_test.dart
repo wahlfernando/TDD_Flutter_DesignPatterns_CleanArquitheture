@@ -4,7 +4,7 @@ import 'package:faker/faker.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import 'package:curso_tdd/domain/helpers/domain_error.dart';
+import 'package:curso_tdd/domain/helpers/helpers.dart';
 import 'package:curso_tdd/domain/usecases/authentication.dart';
 
 import 'package:curso_tdd/data/http/http.dart';
@@ -13,34 +13,30 @@ import 'package:curso_tdd/data/usecases/usecases.dart';
 
 //sut = system under test
 
-
-
-
-
 class HttpClientSpy extends Mock implements HttpClient{}
-
 /*
   A Classe que esta sendo testada aqui nesse teste é a "RemoteAuthentication"
   com a função auth();
 */
 
-
 void main() {
   RemoteAuthentication sut;
   HttpClientSpy httpClient;
   String url;
+  AuthenticationParans parans;
 
 
   setUp((){
     httpClient = HttpClientSpy();
     url = faker.internet.httpUrl();
     sut = RemoteAuthentication(httpClient: httpClient, url: url);
+    parans = AuthenticationParans(email: faker.internet.email(), secret: faker.internet.password());
   });
 
   test('Shuld call HttpClient with correct values',  () async{
     // deve chamar o HttpClient com os valores corretos.
     
-    final parans = AuthenticationParans(email: faker.internet.email(), secret: faker.internet.password());
+    
     await sut.auth(parans);
 
     //está simulando com mockito
@@ -60,11 +56,29 @@ void main() {
     when(httpClient.request(url: anyNamed('url'), method: anyNamed('method'), body: anyNamed('body')))
       .thenThrow(HttpError.badRequest);
 
-    final parans = AuthenticationParans(email: faker.internet.email(), secret: faker.internet.password());
     final future = sut.auth(parans);
 
     //capturando a resposta da requisição.
     expect(future, throwsA(DomainError.unexpected));
 
   });
+
+  test('Shuld throw UnespectedError if HttpClient returns 404',  () async{
+    // Querermos retornar um erro chamado UnespectedError para o usuário.
+    
+    //Mocar a resposta do HttpClient
+    when(httpClient.request(url: anyNamed('url'), method: anyNamed('method'), body: anyNamed('body')))
+      .thenThrow(HttpError.notFound);
+
+    final future = sut.auth(parans);
+
+    //capturando a resposta da requisição.
+    expect(future, throwsA(DomainError.unexpected));
+
+  });
+
+
+
+
+
 }
