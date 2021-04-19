@@ -107,5 +107,33 @@ void main() {
   });
 
 
+  test('Shuld throw InvalideCredencialsError if HttpClient returns 401',  () async{
+    // Querermos retornar um erro chamado UnespectedError para o usuário.
+    
+    //Mocar a resposta do HttpClient
+    when(httpClient.request(url: anyNamed('url'), method: anyNamed('method'), body: anyNamed('body')))
+      .thenThrow(HttpError.anauthorized);
+
+    final future = sut.auth(parans);
+
+    //capturando a resposta da requisição.
+    expect(future, throwsA(DomainError.invalidCredencials));
+
+  });
+
+  //Caso de sucesso do Accaount
+  test('Shuld return an Account if HttpClient returns 200',  () async{
+    // Aqui queremos retornar o sucesso com os dados enviados.
+    
+    when(httpClient.request(url: anyNamed('url'), method: anyNamed('method'), body: anyNamed('body')))
+      .thenThrow(HttpError.anauthorized);
+
+    final future = sut.auth(parans);
+
+    //capturando a resposta da requisição.
+    expect(future, throwsA(DomainError.invalidCredencials));
+
+  });  
+
 
 }
