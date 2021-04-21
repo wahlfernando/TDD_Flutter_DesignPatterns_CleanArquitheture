@@ -1,4 +1,4 @@
-# curso_tdd
+# Curso de TDD e Clean Architecture co Flutter - Inclompleto
 
 A new Flutter project.
 
