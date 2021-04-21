@@ -1,4 +1,4 @@
-# Curso de TDD e Clean Architecture co Flutter - Inclompleto
+# Curso de TDD e Clean Architecture co Flutter - Em Andamento
 
 A new Flutter project.
 
