@@ -11,22 +11,19 @@ class RemoteAuthentication {
   final HttpClient httpClient;
   final String url;
 
-  //Contrutor da classe RemoteAuthentication
   RemoteAuthentication({
     @required this.httpClient,
     @required this.url,
   });
 
-  //aqui que passa os parametros para o teste.
   Future<AccountEntity> auth(AuthenticationParans parans) async {
     final body = RemoteAuthenticationParans.toDomain(parans).toJason();
 
     try {
-      final httpResponse =
-          await httpClient.request(url: url, method: 'post', body: body);
+      final httpResponse = await httpClient.request(url: url, method: 'post', body: body);
       return RemoteAcoountModel.fromJson(httpResponse).toEntity();
     } on HttpError catch (error) {
-      throw error == HttpError.anauthorized
+      throw error == HttpError.unauthorized
           ? DomainError.invalidCredencials
           : DomainError.unexpected;
     }

@@ -104,7 +104,7 @@ void main() {
             url: anyNamed('url'),
             method: anyNamed('method'),
             body: anyNamed('body')))
-        .thenThrow(HttpError.anauthorized);
+        .thenThrow(HttpError.unauthorized);
 
     final future = sut.auth(parans);
 
@@ -121,7 +121,7 @@ void main() {
             url: anyNamed('url'),
             method: anyNamed('method'),
             body: anyNamed('body')))
-        .thenThrow(HttpError.anauthorized);
+        .thenThrow(HttpError.unauthorized);
 
     final future = sut.auth(parans);
 
@@ -142,5 +142,18 @@ void main() {
     final account = await sut.auth(parans);
 
     expect(account.token, accessToken);
+  });
+
+  // Esse teste vai causar uma exeção quando for colocado dados inválidos no retorno.
+  test('Shuld throw UnexpectedError if HttpClient returns 200 with invalid data', () async {
+    when(httpClient.request(
+            url: anyNamed('url'),
+            method: anyNamed('method'),
+            body: anyNamed('body')))
+        .thenAnswer((_) async => {'invalid_key': 'invalid_value'});
+
+    final future = sut.auth(parans);
+
+    expect(future, throwsA(DomainError.unexpected) );
   });
 }
