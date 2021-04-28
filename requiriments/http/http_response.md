@@ -1,18 +1,18 @@
 # HTTP
 
 ##  Sucesso
- 1 - Request com verbo http válido (post)
- 2 - Passar nos headers o content type JSON
- 3 - Chamar request com body correto
- 4 - Ok - 200 e resposta com dados
- 5 - No content - 204 e resposta sem dados
+ 1 - Request com verbo http válido (post) - ok
+ 2 - Passar nos headers o content type JSON - ok
+ 3 - Chamar request com body correto - ok
+ 4 - Ok - 200 e resposta com dados - ok
+ 5 - No content - 204 e resposta sem dados - ok
 
 ##  Erros
- 1 - Bad request - 400
+ 1 - Bad request - 400 - ok
  2 - Unauthorized - 401
- Forbidden - 403
- Not found - 404
- Internal server error - 500
+ 3 - Forbidden - 403
+ 4 - Not found - 404
+ 5 - Internal server error - 500 - ok
 
 ##  Exceção - Status code diferente dos citados acima
  Internal server error - 500
