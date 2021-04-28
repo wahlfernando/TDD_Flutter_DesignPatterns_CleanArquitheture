@@ -9,16 +9,16 @@
 
 ##  Erros
  1 - Bad request - 400 - ok
- 2 - Unauthorized - 401
- 3 - Forbidden - 403
- 4 - Not found - 404
+ 2 - Unauthorized -  - ok
+ 3 - Forbidden - 403 - ok
+ 4 - Not found - 404 - ok
  5 - Internal server error - 500 - ok
 
 ##  Exceção - Status code diferente dos citados acima
- Internal server error - 500
+ Internal server error - 500 - ok
 
 ##  Exceção - Http request deu alguma exceção
- Internal server error - 500
+ Internal server error - 500  - 
 
 ##  Exceção - Verbo http inválido
- Internal server error - 500
+ Internal server error - 500 - ok

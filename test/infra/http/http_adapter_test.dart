@@ -35,6 +35,10 @@ void main() {
       mockRequest().thenAnswer((_) async => Response(body, statusCode));
     }
 
+    void mockError() {
+      mockRequest().thenThrow(Exception());
+    }
+
     //esse cara é padrão vai rodar em todos os testes antes de iniciar;
     //isso serve para não escrever código repetido
     setUp(() {
@@ -144,6 +148,14 @@ void main() {
       final future = sut.request(url: url.toString(), method: 'post');
 
       expect(future, throwsA(HttpError.notFound));
+    });
+
+    test('Shoult return Error if post throws', () async {
+      mockError();
+
+      final future = sut.request(url: url.toString(), method: 'post');
+
+      expect(future, throwsA(HttpError.serverError));
     });
   });
 }
