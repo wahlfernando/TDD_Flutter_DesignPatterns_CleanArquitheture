@@ -18,7 +18,7 @@
  Internal server error - 500 - ok
 
 ##  Exceção - Http request deu alguma exceção
- Internal server error - 500  - 
+ Internal server error - 500  - ok
 
 ##  Exceção - Verbo http inválido
  Internal server error - 500 - ok
