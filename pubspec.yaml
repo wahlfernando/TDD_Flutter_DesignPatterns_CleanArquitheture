@@ -21,9 +21,19 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons:  
   faker:
   test:
   mockito:
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path_android: "assets/icon/android.png"
+  image_path_ios: "assets/icon/ios.png"
+  adaptive_icon_background: "assets/icon/background.png"
+  adaptive_icon_foreground: "assets/icon/foreground.png"
+  
 
 flutter:
 

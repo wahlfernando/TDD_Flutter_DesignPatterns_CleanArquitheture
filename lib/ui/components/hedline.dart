@@ -8,7 +8,7 @@ class Headline1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Login'.toUpperCase(),
+      text.toUpperCase(),
       textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.headline1,
     );
